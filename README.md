@@ -12,6 +12,6 @@ Click [here](https://github.com/cu-ecen-aeld/final-project-Amey2904dash/wiki/Fin
 
 # Team Members
 
-Tanmay Kothale (tanmay.kothale@colorado.edu)
-Varun Mehta (varun.mehta@@colorado.edu)
-Amey Dashaputre (amey.dashaputre@colorado.edu)
+* Tanmay Kothale (tanmay.kothale@colorado.edu)
+* Varun Mehta (varun.mehta@@colorado.edu)
+* Amey Dashaputre (amey.dashaputre@colorado.edu)
