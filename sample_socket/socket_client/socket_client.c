@@ -21,21 +21,10 @@
 void func(int sockfd)
 {
     char buffer[SIZE];
-    int n;
     while(1) {
         bzero(buffer, sizeof(buffer));
-        printf("Enter the string : ");
-        n = 0;
-        while ((buffer[n++] = getchar()) != '\n');
-        write(sockfd, buffer, sizeof(buffer)); // send the message to client
-        bzero(buffer, sizeof(buffer)); // reset string
-        read(sockfd, buffer, sizeof(buffer));  // read client message and copy that in the buffer
-        printf("From Server : %s", buff);
-        if ((strncmp(buffer, "exit", 4)) == 0)   // check if 'Exit' is there in message
-        {
-            printf("Client Exiting...\n");
-            break;
-        }
+        while(read(sockfd, buffer, sizeof(buffer))==0);  // read client message and copy that in the buffer
+        printf("From Server : %s\n\r", buffer);
     }
 }
 

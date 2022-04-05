@@ -21,24 +21,15 @@
 ***********************************************************************************************/
 void func(int sockfd)
 {
-    int i;
-    char buffer[SIZE];
+    char buffer[]="This is sample data.";
  
     while(1) 
     {
-        bzero(buffer, SIZE);
-        read(sockfd, buffer, sizeof(buffer)); // read client message and copy that in the buffer
-        printf("From client: %s\t To client : ", buffer);
-        bzero(buffer, SIZE); // reset string
-        i = 0;
-        while ((buffer[i++] = getchar()) != '\n'); // wait to copy the server message 
         write(sockfd, buffer, sizeof(buffer)); // send the message to client
         
-        if (strncmp("exit", buffer, 4) == 0) // check if 'Exit' is there in message
-        {
-            printf("Server Exiting...\n");
-            break;
-        }
+        //put a hardspin loop as a delay
+        for (int i=0; i<500; i++)
+            for(int j=0; j<100000; j++);
     }
 }
    
@@ -71,6 +62,14 @@ int main()
     servaddr.sin_port = htons(PORT);
    
     // 2. Bind the socket
+    
+    if ((setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &(int){1}, sizeof(int))) == -1) {
+        printf("socket opt failed...\n");
+        exit(0);
+    }
+    else
+        printf("Socket opt succeeded..\n");
+        
     if ((bind(sockfd, (SA*)&servaddr, sizeof(servaddr))) != 0) 
     {
         printf("Error! bind() socket failed\n");
