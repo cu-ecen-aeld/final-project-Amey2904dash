@@ -1,12 +1,11 @@
 
 
-ifeq ($(CC),)
-	CC=aarch64-none-linux-gnu-gcc
-endif
 
-ifeq ($(CFLAGS),)
-	CFLAGS= -g -Wall -Werror
-endif
+CC=aarch64-none-linux-gnu-gcc
+
+
+CFLAGS= -g -Wall -Werror
+
 
 all: socket_server
 default: socket_server
