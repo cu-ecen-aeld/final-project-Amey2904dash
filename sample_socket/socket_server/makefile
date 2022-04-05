@@ -1,7 +1,7 @@
-CROSS_COMPILE=
+
 
 ifeq ($(CC),)
-	CC=$(CROSS_COMPILE)gcc
+	CC=aarch64-none-linux-gnu-gcc
 endif
 
 ifeq ($(CFLAGS),)
