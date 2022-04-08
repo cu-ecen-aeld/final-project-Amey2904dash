@@ -28,8 +28,10 @@ void func(int sockfd)
         write(sockfd, buffer, sizeof(buffer)); // send the message to client
         
         //put a hardspin loop as a delay
-        for (int i=0; i<500; i++)
-            for(int j=0; j<100000; j++);
+      //  for (int i=0; i<500; i++)
+           // for(int j=0; j<100000; j++);
+           
+       usleep(1000000);
     }
 }
         
