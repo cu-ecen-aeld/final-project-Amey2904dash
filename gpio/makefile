@@ -1,19 +1,19 @@
 
-CC=gcc
+CC = $(CROSS_COMPILE)gcc
+
+CFLAGS = -g -Wall -Werror
+
+INCLUDES = -I/
+
+all: lcd 
 
 
-CFLAGS= -g -Wall -Werror
+lcd.o: lcd.c
+	$(CC) $(CFLAGS) -c lcd.c
 
+lcd: lcd.o
+	$(CC) $(CFLAGS) lcd.o -o lcd -lgpiod
 
-all: gpiodriver
-default: gpiodriver
-
-
-gpiodriver.o: gpiodriver.c
-	$(CC) $(CFLAGS) -c gpiodriver.c
-
-gpiodriver : gpiodriver.o
-	$(CROSS_COMPILE)$(CC) $(CFLAGS) gpiodriver.o -o gpiodriver
-
-clean :
-	rm -f gpiodriver *.o
+clean:
+	rm -f *.o
+	rm -f lcd
