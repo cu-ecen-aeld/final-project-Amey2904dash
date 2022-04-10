@@ -117,15 +117,15 @@ int main()
   
   while (1)
   {
-     //lcd_clear();
+     lcd_clear();
+     delay(1000);
      lcd_print("Hello World");
-     
-     usleep(5000000);
+     delay(5000);
      	
-     //lcd_clear();
+     lcd_clear();
+     delay(1000);
      lcd_print("Hello Again, World");
-     
-     usleep(5000000);
+     delay(5000);
   }
   
   return 0 ;
