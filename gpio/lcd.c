@@ -120,16 +120,12 @@ int main()
      //lcd_clear();
      lcd_print("Hello World");
      
-     //usleep(5000000);
-     
-     for (int i=0; i<500; i++)
-     	for(int j=00; j<100000; j++);
+     usleep(5000000);
      	
      //lcd_clear();
      lcd_print("Hello Again, World");
      
-     for (int i=0; i<500; i++)
-     	for(int j=00; j<100000; j++);
+     usleep(5000000);
   }
   
   return 0 ;
