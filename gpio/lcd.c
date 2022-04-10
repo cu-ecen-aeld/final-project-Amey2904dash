@@ -20,7 +20,8 @@
 void pulseEnable ()
 {
    digitalWrite (LCD_E, HIGH) ; 
-   delay(0.5); //  1/2 microsecond pause - enable pulse must be > 450ns
+   delay(2); //  1/2 microsecond pause - enable pulse must be > 450ns
+   //delayMicroseconds(0.5);
    digitalWrite (LCD_E, LOW) ; 
 }
 
@@ -119,12 +120,12 @@ int main()
   {
      lcd_clear();
      delay(1000);
-     lcd_print("Hello World");
+     lcd_print("Tanmay");
      delay(5000);
      	
      lcd_clear();
      delay(1000);
-     lcd_print("Hello Again, World");
+     lcd_print("Varun");
      delay(5000);
   }
   
