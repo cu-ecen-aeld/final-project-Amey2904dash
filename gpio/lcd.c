@@ -1,9 +1,5 @@
-/*
- * Test Code reference from internet
- * All the wiringpi functions are replaced with libgpiod functions
- * Added lcd_print() function - to print a message on lcd
- *	 
- */
+
+
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -179,6 +175,10 @@ int main()
   lcd_init();
   
   SetChrMode(); 
-  lcd_text("Hello World");
+  while (1)
+  {
+    lcd_print("Hello World");
+  }
+
   return 0 ;
 }
