@@ -1,19 +1,10 @@
-
-CC = $(CROSS_COMPILE)gcc
-
-CFLAGS = -g -Wall -Werror
-
-INCLUDES = -I/
-
-all: lcd 
-
-
-lcd.o: lcd.c
-	$(CC) $(CFLAGS) -c lcd.c
-
-lcd: lcd.o
-	$(CC) $(CFLAGS) lcd.o -o lcd -lgpiod
-
+CC = gcc 
+CFLAGS = -Wall -Werror
+LDFLAGS = -lrt -lgpiod -pthread
+OBJFILES = wiringPi.o lcd.o
+TARGET = lcd
+all: $(TARGET)
+$(TARGET): $(OBJFILES)
+	$(CC) $(CFLAGS) -o $(TARGET) $(OBJFILES) $(LDFLAGS)
 clean:
-	rm -f *.o
-	rm -f lcd
+	rm -f $(OBJFILES) $(TARGET) *~
