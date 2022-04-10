@@ -120,12 +120,17 @@ int main()
   {
      lcd_clear();
      delay(1000);
-     lcd_print("Tanmay");
+     lcd_print("Tanmay Kothale");
      delay(5000);
      	
      lcd_clear();
      delay(1000);
-     lcd_print("Varun");
+     lcd_print("Varun Mehta");
+     delay(5000);
+     
+     lcd_clear();
+     delay(1000);
+     lcd_print("Amey Dashaputre");
      delay(5000);
   }
   
