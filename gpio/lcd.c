@@ -51,7 +51,7 @@ void SetCmdMode()
 void SetChrMode() 
 {
   digitalWrite (LCD_RS, 1); // set for characters
-  printf("Entered SetChrMode()\n");
+  //printf("Entered SetChrMode()\n");
 }
 
 void lcd_text(char *s)
@@ -80,7 +80,7 @@ void lcd_init()
    lcd_byte(0x0C); // display on, cursor off, blink off
    lcd_byte(0x01);  // clear screen
    delay(3);        // clear screen is slow!
-   printf("Entered LCD Init\n");
+   //printf("Entered LCD Init\n");
 }
 
 void lcd_clear()
@@ -117,9 +117,19 @@ int main()
   
   while (1)
   {
-     lcd_clear();
+     //lcd_clear();
      lcd_print("Hello World");
-     usleep(1000000);
+     
+     //usleep(5000000);
+     
+     for (int i=0; i<500; i++)
+     	for(int j=00; j<100000; j++);
+     	
+     //lcd_clear();
+     lcd_print("Hello Again, World");
+     
+     for (int i=0; i<500; i++)
+     	for(int j=00; j<100000; j++);
   }
   
   return 0 ;
