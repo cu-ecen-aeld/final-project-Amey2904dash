@@ -8,7 +8,6 @@
 #include <string.h>
 #include <sys/socket.h>
 
-
 #define SIZE 80
 #define PORT 8080
 #define SA struct sockaddr
@@ -27,11 +26,8 @@ void func(int sockfd)
     {
         write(sockfd, buffer, sizeof(buffer)); // send the message to client
         
-        //put a hardspin loop as a delay
-      //  for (int i=0; i<500; i++)
-           // for(int j=0; j<100000; j++);
-           
-       usleep(1000000);
+        //sleep for one second, then repeat
+        usleep(1000000);
     }
 }
         

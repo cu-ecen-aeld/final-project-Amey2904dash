@@ -22,8 +22,12 @@ void func(int sockfd)
 {
     char buffer[SIZE];
     while(1) {
+    	//clear the buffer
         bzero(buffer, sizeof(buffer));
-        while(read(sockfd, buffer, sizeof(buffer))==0);  // read client message and copy that in the buffer
+        //wait here till there is data to be read from server
+	//read client message and copy that in the buffer
+	while(read(sockfd, buffer, sizeof(buffer))==0); 
+        //print the message received from server
         printf("From Server : %s\n\r", buffer);
     }
 }
