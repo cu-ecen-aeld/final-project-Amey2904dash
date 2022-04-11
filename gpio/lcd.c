@@ -1,27 +1,20 @@
-/*
- * Code referred from internet
- * Added lcd_print() function - to print a message on lcd
- *	 
- */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include "lcd.h"
 
+//Defines for GPIO pins on Raspberry Pi
 #define LCD_E 23
 #define LCD_RS 22
 #define LCD_D4 24
 #define LCD_D5 25
 #define LCD_D6 8
 #define LCD_D7 7
-#define GPIO_LED 5
 
 void pulseEnable ()
 {
    digitalWrite (LCD_E, HIGH) ; 
-   delay(2); //  1/2 microsecond pause - enable pulse must be > 450ns
-   //delayMicroseconds(0.5);
+   delay(2); //  2 millisecond pause - enable pulse must be > 450ns
    digitalWrite (LCD_E, LOW) ; 
 }
 
@@ -52,7 +45,6 @@ void SetCmdMode()
 void SetChrMode() 
 {
   digitalWrite (LCD_RS, 1); // set for characters
-  //printf("Entered SetChrMode()\n");
 }
 
 void lcd_text(char *s)
@@ -81,7 +73,6 @@ void lcd_init()
    lcd_byte(0x0C); // display on, cursor off, blink off
    lcd_byte(0x01);  // clear screen
    delay(3);        // clear screen is slow!
-   //printf("Entered LCD Init\n");
 }
 
 void lcd_clear()
@@ -103,7 +94,6 @@ void lcd_print(char *msg)
   lcd_byte(0x80);  // set home loc
   delay(3);
   SetChrMode(); 
-  //lcd_text("Temp is ");
   lcd_text(msg);
   delay(5);
 }
@@ -116,6 +106,9 @@ int main()
   
   SetChrMode(); 
   
+  //for testing purposes, print a hard coded
+  //string, clear it, print another, and repeat it
+  //forever
   while (1)
   {
      lcd_clear();

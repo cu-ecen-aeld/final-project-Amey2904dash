@@ -12,8 +12,4 @@ void lcd_init();
 void lcd_clear();
 void lcd_print(char *msg);
 
-
-
-
-
 #endif
