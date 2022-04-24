@@ -40,21 +40,21 @@ void main()
 	
 	int temp_fd;
 	
+
+	temp_fd = open(TEMP_FILE_PATH, O_WRONLY);
+	// Select configuration register(0x01)
+	// Continous Conversion mode, 12-Bit Resolution
+	char buf[3] = {0};
+	buf[0] = 0x01;
+	buf[1] = 0x60;
+	buf[2] = 0xA0;
+	write(file, buf, 3);
+
+	//Wait for the transaction to complete and sensor to initialise and perform measurement
+	sleep(1);
+	
 	while(1)
 	{
-		temp_fd = open(TEMP_FILE_PATH, O_WRONLY);
-		// Select configuration register(0x01)
-		// Continous Conversion mode, 12-Bit Resolution
-		char buf[3] = {0};
-		buf[0] = 0x01;
-		buf[1] = 0x60;
-		buf[2] = 0xA0;
-		write(file, buf, 3);
-
-		//Wait for the transaction to complete and sensor to initialise and perform measurement
-		sleep(1);
-	
-
 		//On completing the measurement, the values can be read
 		char reg[1] = {0x00};
 		write(file, reg, 1);
@@ -76,11 +76,13 @@ void main()
 			temp -= 4096;
 		}
 		syslog(LOG_DEBUG,"Temperature in Celsius : %d degree C", (int)(temp * 0.0625));
-		printf("Temperature in Celsius : %d degree C/n/r", (int)(temp * 0.0625));
+		printf("Temperature in Celsius : %d degree C\n\r", (int)(temp * 0.0625));
 		
 		int final_temp = (int) (temp * 0.0625);
 		
-		write(temp_fd, final_temp, sizeof(final_temp));
+		char temp2[2] = "24";
+		
+		write(temp_fd, temp2, sizeof(temp2));
 		usleep(1000000);
 		close(temp_fd);
 	}
