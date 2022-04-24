@@ -1,6 +1,8 @@
 #include <netdb.h>
 #include <stdio.h>
 #include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 #include <unistd.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
@@ -11,7 +13,12 @@
 #define SIZE 80
 #define PORT 8080
 #define SA struct sockaddr
-   
+
+#define ERROR -1
+
+#define NAMES_FILE_PATH "/home/pi/Desktop/socket_server_2/names.txt"
+#define TEMP_FILE_PATH "/home/pi/Desktop/socket_server_2/temp.txt"
+
  /***********************************************************************************************
 * Name          : func
 * Description   : function for server- client communication 
@@ -20,15 +27,54 @@
 ***********************************************************************************************/
 void func(int sockfd)
 {
-    char buffer[]="This is sample data.";
- 
-    while(1) 
-    {
-        write(sockfd, buffer, sizeof(buffer)); // send the message to client
-        
-        //sleep for one second, then repeat
-        usleep(1000000);
-    }
+	char name[20];
+	int name_fd, temp_fd; 
+	int name_ptr = 0;
+	char *name_ch=(char*)malloc(sizeof(char));
+	char *temp_ch=(char*)malloc(sizeof(char)); 
+	
+	name_fd = open(NAMES_FILE_PATH, O_RDONLY);
+	temp_fd = open(TEMP_FILE_PATH, O_RDONLY);
+	//status=read(name_fd, name_ch, 1);
+	//printf("Bytes read: %d\n", status);
+	while(1)
+	{
+	    while (read(name_fd, name_ch, 1) == 0);
+	    if(1)
+	    {
+		//printf("name_ch: %c\n", *name_ch);
+		    if (*name_ch != '\n')
+		    {
+			    name[name_ptr++] = *name_ch;
+		    }
+		    else
+		    {
+			    name[name_ptr++] = 32;
+			    while (read(temp_fd, temp_ch, 1) != 0)
+			    {
+				//printf("temp_ch: %c\n", *temp_ch);
+				    if (*temp_ch != '\n')
+				    {
+					    name[name_ptr++] = *temp_ch;
+				    }
+				    else
+				    {
+					    name[name_ptr++] = '\0';
+					    break;
+				    }
+			    }
+			    //printf("string: %s\n", name);
+			    if(name != NULL)
+			    {
+				write(sockfd, name, sizeof(name));
+				memset(name, 0, 20);
+				name_ptr = 0;
+				usleep(1000000);
+			    }
+		    }
+	    }
+
+	}
 }
         
  /***********************************************************************************************
@@ -109,3 +155,4 @@ int main()
     //6. Close the socket
     close(sockfd);
 }
+
