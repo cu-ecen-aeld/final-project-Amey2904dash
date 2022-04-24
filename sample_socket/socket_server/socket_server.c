@@ -35,14 +35,14 @@ void func(int sockfd)
 	
 	name_fd = open(NAMES_FILE_PATH, O_RDONLY);
 	temp_fd = open(TEMP_FILE_PATH, O_RDONLY);
-	//status=read(name_fd, name_ch, 1);
-	//printf("Bytes read: %d\n", status);
+	int status=read(name_fd, name_ch, 1);
+	printf("Bytes read: %d\n", status);
 	while(1)
 	{
 	    while (read(name_fd, name_ch, 1) == 0);
 	    if(1)
 	    {
-		//printf("name_ch: %c\n", *name_ch);
+		printf("name_ch: %c\n", *name_ch);
 		    if (*name_ch != '\n')
 		    {
 			    name[name_ptr++] = *name_ch;
@@ -52,7 +52,7 @@ void func(int sockfd)
 			    name[name_ptr++] = 32;
 			    while (read(temp_fd, temp_ch, 1) != 0)
 			    {
-				//printf("temp_ch: %c\n", *temp_ch);
+				printf("temp_ch: %c\n", *temp_ch);
 				    if (*temp_ch != '\n')
 				    {
 					    name[name_ptr++] = *temp_ch;
@@ -63,7 +63,7 @@ void func(int sockfd)
 					    break;
 				    }
 			    }
-			    //printf("string: %s\n", name);
+			    printf("string: %s\n", name);
 			    if(name != NULL)
 			    {
 				write(sockfd, name, sizeof(name));
