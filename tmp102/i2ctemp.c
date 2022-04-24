@@ -46,26 +46,30 @@ void main()
 	//Wait for the transaction to complete and sensor to initialise and perform measurement
 	sleep(1);
 	
-	//On completing the measurement, the values can be read
-	char reg[1] = {0x00};
-	write(file, reg, 1);
+	while(1)
+	{
+		//On completing the measurement, the values can be read
+		char reg[1] = {0x00};
+		write(file, reg, 1);
 
-	//read the measured temperature value
-	char measured_temp[2] = {0};
-	int rc = read(file, measured_temp, 2);
-	if( rc != 2)
-	{
-		syslog(LOG_ERR,"i2c read transaction failed");
-		printf("i2c read transaction failed %d",rc);
-		exit(1);
+		//read the measured temperature value
+		char measured_temp[2] = {0};
+		int rc = read(file, measured_temp, 2);
+		if( rc != 2)
+		{
+			syslog(LOG_ERR,"i2c read transaction failed");
+			printf("i2c read transaction failed %d",rc);
+			exit(1);
+		}
+		
+		//Convert register values to temperature measurements
+		int temp = (measured_temp[0] * 256 + measured_temp[1]) / 16;
+		if(temp > 2047)
+		{
+			temp -= 4096;
+		}
+		syslog(LOG_DEBUG,"Temperature in Celsius : %d degree C", (int)(temp * 0.0625));
+		printf("Temperature in Celsius : %d degree C/n/r", (int)(temp * 0.0625));
 	}
-	
-	//Convert register values to temperature measurements
-	int temp = (measured_temp[0] * 256 + measured_temp[1]) / 16;
-	if(temp > 2047)
-	{
-		temp -= 4096;
-	}
-	syslog(LOG_DEBUG,"Temperature in Celsius : %d degree C", (int)(temp * 0.0625));
-	printf("Temperature in Celsius : %d degree C/n/r", (int)(temp * 0.0625));
+
 }
