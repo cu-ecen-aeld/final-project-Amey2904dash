@@ -34,11 +34,12 @@ void func(int sockfd)
 	char *temp_ch=(char*)malloc(sizeof(char)); 
 	
 	name_fd = open(NAMES_FILE_PATH, O_RDONLY);
-	temp_fd = open(TEMP_FILE_PATH, O_RDONLY);
+	//temp_fd = open(TEMP_FILE_PATH, O_RDONLY);
 	int status=read(name_fd, name_ch, 1);
 	printf("Bytes read: %d\n", status);
 	while(1)
 	{
+	    temp_fd = open(TEMP_FILE_PATH, O_RDONLY);
 	    while (read(name_fd, name_ch, 1) == 0);
 	    if(1)
 	    {
@@ -67,6 +68,7 @@ void func(int sockfd)
 			    if(name != NULL)
 			    {
 				write(sockfd, name, sizeof(name));
+				close(temp_fd);
 				memset(name, 0, 20);
 				name_ptr = 0;
 				usleep(1000000);

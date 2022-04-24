@@ -56,7 +56,7 @@ int main()
    
     // assign IP, PORT
     servaddr.sin_family = AF_INET;
-    servaddr.sin_addr.s_addr = inet_addr("10.0.0.77");
+    servaddr.sin_addr.s_addr = inet_addr("10.0.0.81");
     servaddr.sin_port = htons(PORT);
    
     if (connect(sockfd, (SA*)&servaddr, sizeof(servaddr)) != 0)      // connect the client socket to server socket

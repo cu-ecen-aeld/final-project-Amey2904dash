@@ -13,10 +13,13 @@
 #include <syslog.h>
 #include <unistd.h>
 
+#define TEMP_FILE_PATH "/etc/face-rec-sample/temp.txt"
+
 void main() 
 {
 	// Create I2C bus
 	int file;
+
 	
 	char *i2c_dev_filename = "/dev/i2c-1";//Always adapter 1 on RPi
 	file = open(i2c_dev_filename, O_RDWR);
@@ -34,20 +37,24 @@ void main()
 		syslog(LOG_ERR,"Failed to set the address of the device to address");
 		exit(1);
 	}
-
-	// Select configuration register(0x01)
-	// Continous Conversion mode, 12-Bit Resolution
-	char buf[3] = {0};
-	buf[0] = 0x01;
-	buf[1] = 0x60;
-	buf[2] = 0xA0;
-	write(file, buf, 3);
-
-	//Wait for the transaction to complete and sensor to initialise and perform measurement
-	sleep(1);
+	
+	int temp_fd;
 	
 	while(1)
 	{
+		temp_fd = open(TEMP_FILE_PATH, O_WRONLY);
+		// Select configuration register(0x01)
+		// Continous Conversion mode, 12-Bit Resolution
+		char buf[3] = {0};
+		buf[0] = 0x01;
+		buf[1] = 0x60;
+		buf[2] = 0xA0;
+		write(file, buf, 3);
+
+		//Wait for the transaction to complete and sensor to initialise and perform measurement
+		sleep(1);
+	
+
 		//On completing the measurement, the values can be read
 		char reg[1] = {0x00};
 		write(file, reg, 1);
@@ -70,6 +77,12 @@ void main()
 		}
 		syslog(LOG_DEBUG,"Temperature in Celsius : %d degree C", (int)(temp * 0.0625));
 		printf("Temperature in Celsius : %d degree C/n/r", (int)(temp * 0.0625));
+		
+		int final_temp = (int) (temp * 0.0625);
+		
+		write(temp_fd, final_temp, sizeof(final_temp));
+		usleep(1000000);
+		close(temp_fd);
 	}
 
 }
