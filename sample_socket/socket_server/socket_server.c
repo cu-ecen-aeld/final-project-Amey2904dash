@@ -16,8 +16,8 @@
 
 #define ERROR -1
 
-#define NAMES_FILE_PATH "/home/pi/Desktop/socket_server_2/names.txt"
-#define TEMP_FILE_PATH "/home/pi/Desktop/socket_server_2/temp.txt"
+#define NAMES_FILE_PATH "/etc/face-rec-sample/names.txt"
+#define TEMP_FILE_PATH "/etc/face-rec-sample/temp.txt"
 
  /***********************************************************************************************
 * Name          : func
