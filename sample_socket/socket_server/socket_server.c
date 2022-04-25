@@ -50,11 +50,11 @@ void func(int sockfd)
 		    }
 		    else
 		    {
-			    name[name_ptr++] = 32;
+			    name[name_ptr++] = 45;
 			    while (read(temp_fd, temp_ch, 1) != 0)
 			    {
 				printf("temp_ch: %c\n", *temp_ch);
-				    if (*temp_ch != '\n')
+				    if (*temp_ch != '\n' && *temp_ch != 255)
 				    {
 					    name[name_ptr++] = *temp_ch;
 				    }

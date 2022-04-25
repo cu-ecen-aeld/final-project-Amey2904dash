@@ -82,7 +82,7 @@ void main()
 		int final_temp = (int) (temp * 0.0625);
 		
 		
-		char temp2[2];
+		char temp2[2]='\0';
 		sprintf(temp2, "%d", final_temp);	
 		
 		syslog(LOG_DEBUG,"Temperature in Celsius : %d degree C", final_temp);
