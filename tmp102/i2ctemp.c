@@ -41,7 +41,7 @@ void main()
 	int temp_fd;
 	
 
-	temp_fd = open(TEMP_FILE_PATH, O_WRONLY);
+	//temp_fd = open(TEMP_FILE_PATH, O_WRONLY);
 	// Select configuration register(0x01)
 	// Continous Conversion mode, 12-Bit Resolution
 	char buf[3] = {0};
@@ -55,6 +55,7 @@ void main()
 	
 	while(1)
 	{
+		temp_fd = open(TEMP_FILE_PATH, O_WRONLY);
 		//On completing the measurement, the values can be read
 		char reg[1] = {0x00};
 		write(file, reg, 1);
@@ -88,8 +89,9 @@ void main()
 		printf("Temperature in Celsius : %d degree C\n\r", final_temp);
 		printf("Temperature in Celsius Temp2 : %s degree C\n\r", temp2);
 		
+		usleep(1000);
 		write(temp_fd, temp2, sizeof(temp2));
-		usleep(100000);
+		usleep(1000000);
 		close(temp_fd);
 	}
 
