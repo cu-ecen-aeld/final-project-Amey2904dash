@@ -80,7 +80,11 @@ void main()
 		
 		int final_temp = (int) (temp * 0.0625);
 		
-		char temp2[2] = "24";
+		
+		char temp2[2];
+		sprintf(temp2, "%d", final_temp);	
+		
+		//char temp2[2] = "24";
 		
 		write(temp_fd, temp2, sizeof(temp2));
 		usleep(1000000);
