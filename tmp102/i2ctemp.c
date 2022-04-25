@@ -75,8 +75,8 @@ void main()
 		{
 			temp -= 4096;
 		}
-		syslog(LOG_DEBUG,"Temperature in Celsius : %d degree C", (int)(temp * 0.0625));
-		printf("Temperature in Celsius : %d degree C\n\r", (int)(temp * 0.0625));
+		//syslog(LOG_DEBUG,"Temperature in Celsius : %d degree C", (int)(temp * 0.0625));
+		//printf("Temperature in Celsius : %d degree C\n\r", (int)(temp * 0.0625));
 		
 		int final_temp = (int) (temp * 0.0625);
 		
@@ -84,10 +84,12 @@ void main()
 		char temp2[2];
 		sprintf(temp2, "%d", final_temp);	
 		
-		//char temp2[2] = "24";
+		syslog(LOG_DEBUG,"Temperature in Celsius : %d degree C", final_temp);
+		printf("Temperature in Celsius : %d degree C\n\r", final_temp);
+		printf("Temperature in Celsius Temp2 : %s degree C\n\r", temp2);
 		
 		write(temp_fd, temp2, sizeof(temp2));
-		usleep(1000000);
+		usleep(100000);
 		close(temp_fd);
 	}
 
