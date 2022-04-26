@@ -14,7 +14,7 @@
 #include <syslog.h>
 #include <unistd.h>
 
-#define TEMP_FILE_PATH "/etc/face-rec-sample/temp.txt"
+#define TEMP_FILE_PATH "/etc/face-rec-sample/temp.txt" 
 
 void main() 
 {
