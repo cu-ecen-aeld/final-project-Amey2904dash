@@ -1,3 +1,16 @@
+/*
+ * @file_name	: socket_server.c
+ *
+ * @author	: Amey Dashaputre, Tanmay Kothale, Varun Mehta
+ *
+ * @references	: https://github.com/cu-ecen-aeld/assignments-3-and-later-Amey2904dash/blob/main/server/aesdsocket.c
+ *
+ * @brief	: Socket server application code. Connects to client, reads data stored by facial recognition
+ *		  application and temperature sensor application and sends it to client.
+ *
+ */
+
+
 #include <netdb.h>
 #include <stdio.h>
 #include <sys/types.h>
@@ -10,14 +23,14 @@
 #include <string.h>
 #include <sys/socket.h>
 
-#define SIZE 80
-#define PORT 8080
+#define SIZE 80		//maximum size of packet received
+#define PORT 8080		//port for socket
 #define SA struct sockaddr
 
 #define ERROR -1
 
-#define NAMES_FILE_PATH "/etc/face-rec-sample/names.txt"
-#define TEMP_FILE_PATH "/etc/face-rec-sample/temp.txt"
+#define NAMES_FILE_PATH "/etc/face-rec-sample/names.txt"	//to read data stored by facial recognition application
+#define TEMP_FILE_PATH "/etc/face-rec-sample/temp.txt"	//to read data stored by temperature sensor application
 
  /***********************************************************************************************
 * Name          : func
