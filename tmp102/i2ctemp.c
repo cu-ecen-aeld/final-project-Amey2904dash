@@ -1,9 +1,10 @@
 //Name   : i2ctemp.c
-//Author : Venkat Tata
-//Date   : 11/12/21
+//Author : Varun Mehta, Amey Dashaputre, Tanmay Kothale
+//Date   : 04/26/2022
 //brief  : Reads the temperature value measured by the I2C based TMP102 sensor itnerfaced to RPi via I2C-1 
 //References : https://www.kernel.org/doc/Documentation/i2c/dev-interface
-//Additional reference : https://github.com/ControlEverythingCommunity/TMP112/blob/master/C/TMP112.c
+//Additional reference : 1. https://github.com/ControlEverythingCommunity/TMP112/blob/master/C/TMP112.c
+//			  2. https://github.com/cu-ecen-aeld/final-project-VenkatTata/blob/master/tempsensor/i2ctemp.c
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -19,9 +20,9 @@ void main()
 {
 	// Create I2C bus
 	int file;
-
 	
-	char *i2c_dev_filename = "/dev/i2c-1";//Always adapter 1 on RPi
+	//Always adapter 1 on RPi
+	char *i2c_dev_filename = "/dev/i2c-1";
 	file = open(i2c_dev_filename, O_RDWR);
 	if(file < 0) 
 	{
@@ -29,7 +30,8 @@ void main()
 		exit(1);
 	}
 
-	int addr= 0x48; //TMP102 I2C address is 0x48(72)
+	//TMP102 I2C address is 0x48(72)
+	int addr= 0x48; 
 	
 	//set the address of the device to address
 	if(ioctl(file, I2C_SLAVE, 0x48) < 0)
@@ -38,10 +40,8 @@ void main()
 		exit(1);
 	}
 	
-	int temp_fd;
+	int temp_fd; //for a file to open and write temperature value in it
 	
-
-	//temp_fd = open(TEMP_FILE_PATH, O_WRONLY);
 	// Select configuration register(0x01)
 	// Continous Conversion mode, 12-Bit Resolution
 	char buf[3] = {0};
@@ -55,7 +55,9 @@ void main()
 	
 	while(1)
 	{
+		//open the file to store temperature
 		temp_fd = open(TEMP_FILE_PATH, O_WRONLY);
+		
 		//On completing the measurement, the values can be read
 		char reg[1] = {0x00};
 		write(file, reg, 1);
@@ -76,22 +78,27 @@ void main()
 		{
 			temp -= 4096;
 		}
-		//syslog(LOG_DEBUG,"Temperature in Celsius : %d degree C", (int)(temp * 0.0625));
-		//printf("Temperature in Celsius : %d degree C\n\r", (int)(temp * 0.0625));
 		
+		//Convert recorded value from sensor to a readable value
 		int final_temp = (int) (temp * 0.0625);
 		
+		char temp2[2]; //to convert the temp in string and store it to file
+		sprintf(temp2, "%d", final_temp);	//converting from int to string
 		
-		char temp2[2];
-		sprintf(temp2, "%d", final_temp);	
+		//Log the result on temperature (for Debug)
+		//printf("Temperature in Celsius : %d degree C\n\r", final_temp);
+		//printf("Temperature in Celsius Temp2 : %s degree C\n\r", temp2);
 		
-		syslog(LOG_DEBUG,"Temperature in Celsius : %d degree C", final_temp);
-		printf("Temperature in Celsius : %d degree C\n\r", final_temp);
-		printf("Temperature in Celsius Temp2 : %s degree C\n\r", temp2);
+		//sleep for 1 msec
+		//usleep(1000);
 		
-		usleep(1000);
+		//write the data to file
 		write(temp_fd, temp2, sizeof(temp2));
+		
+		//sleep for 1 second
 		usleep(1000000);
+		
+		//close the file
 		close(temp_fd);
 	}
 
