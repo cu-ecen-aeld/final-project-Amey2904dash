@@ -16,7 +16,7 @@ Click [here](https://github.com/cu-ecen-aeld/final-project-Amey2904dash/wiki/Tan
 
 Click [here](https://github.com/cu-ecen-aeld/final-project-Amey2904dash/wiki/Varun's-Final-Project-Video) for Varun's Final Project Video.
 
-Click [here](https://github.com/cu-ecen-aeld/final-project-Amey2904dash/wiki/Final-Project-Schedule-Page) for Amey's Final Project Video.
+Click [here](https://github.com/cu-ecen-aeld/final-project-Amey2904dash/wiki/Amey's-Final-Project-Video) for Amey's Final Project Video.
 
 
 # Team Members
