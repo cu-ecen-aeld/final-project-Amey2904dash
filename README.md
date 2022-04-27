@@ -10,6 +10,15 @@ Click [here](https://github.com/cu-ecen-aeld/final-project-Amey2904dash/wiki/Pro
 
 Click [here](https://github.com/cu-ecen-aeld/final-project-Amey2904dash/wiki/Final-Project-Schedule-Page) for Project Schedule page.
 
+# Student Video Demos
+
+Click [here](https://github.com/cu-ecen-aeld/final-project-Amey2904dash/wiki/Final-Project-Schedule-Page) for Tanmay's Final Project Video.
+
+Click [here](https://github.com/cu-ecen-aeld/final-project-Amey2904dash/wiki/Final-Project-Schedule-Page) for Varun's Final Project Video.
+
+Click [here](https://github.com/cu-ecen-aeld/final-project-Amey2904dash/wiki/Final-Project-Schedule-Page) for Amey's Final Project Video.
+
+
 # Team Members
 
 * Tanmay Kothale (tanmay.kothale@colorado.edu)
