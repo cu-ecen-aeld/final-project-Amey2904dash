@@ -1,3 +1,15 @@
+/*
+ * @file_name	: socket_client.c
+ *
+ * @author	: Amey Dashaputre, Tanmay Kothale, Varun Mehta
+ *
+ * @references	: https://github.com/cu-ecen-aeld/assignments-3-and-later-Amey2904dash/blob/main/server/aesdsocket.c
+ *
+ * @brief	: Socket client application code. Connects to server, reads data sent from server, and prints it on 
+ *		  16x4 LCD Display.
+ *
+ */
+
 #include <netdb.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -23,12 +35,11 @@
 ***********************************************************************************************/
 void func(int sockfd)
 {
-    char buffer[SIZE];
-    char buffer2[SIZE];
-    //int count = 0;
-    int flag = 0;
-    int j = 0; 
-    int i=0;
+    char buffer[SIZE]; 	//recieved data from server
+    char buffer2[SIZE];	//modified data to print on LCD
+    int flag = 0;		//sets when name is stored successfully
+    int j = 0, i = 0;; 	//loop variables
+  
     while(1) 
     {
         //clear the buffer
@@ -39,18 +50,18 @@ void func(int sockfd)
         //read client message and copy that in the buffer
         while(read(sockfd, buffer, sizeof(buffer))==0); 
         
-        i=-1; j =0; flag = 0;
+        i=-1; j =0; flag = 0; //reset all loop variables and flags
         while (++i<20)
         {   
-            if (buffer[i] != '-' && flag != 1)
+            if (buffer[i] != '-' && flag != 1)	//check whether name is read from packet successfully
             {
                 buffer2[j++] = buffer[i];
             }
             else
             {
                 
-                flag = 1;
-                while (j < 16)
+                flag = 1;				//once name is read, add extra spaces to isolate temperature
+                while (j < 16)			//value from data packet
                 {
                     buffer[i] = ' ';
                     buffer2[j++] = ' ';
@@ -64,10 +75,11 @@ void func(int sockfd)
         delay(1000);
         lcd_print(buffer2);
         
+        //modified data packet printed on LCD (debug)
         //printf("For LCD : %s\n\r", buffer2);
         
-        //print the message received from server
-        printf("From Server : %s\n\r", buffer);
+        //print the message received from server (debug)
+	//printf("From Server : %s\n\r", buffer);
 
     }
 }
@@ -81,7 +93,7 @@ void func(int sockfd)
 int main()
 {
     
-    lcd_init();
+    lcd_init(); //initialize LCD display
     SetChrMode(); 
     
     int sockfd;

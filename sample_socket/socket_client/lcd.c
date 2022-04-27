@@ -1,3 +1,16 @@
+/*
+ * @file_name	: lcd.c
+ *
+ * @author	: Amey Dashaputre, Tanmay Kothale, Varun Mehta
+ *
+ * @references	: 1. https://github.com/cu-ecen-aeld/final-project-support-midhun-venkat/blob/master/final_test_client_integrated/lcd.c
+ *		  2. https://www.instructables.com/How-to-Interface-a-16x4-LCD-With-an-Arduino/
+ *
+ * @brief	: Socket server application code. Connects to client, reads data stored by facial recognition
+ *		  application and temperature sensor application and sends it to client.
+ *
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -98,39 +111,3 @@ void lcd_print(char *msg)
   delay(5);
 }
 
-/*
- 
-int main() 
-{
-  lcd_init();
-  
-  SetChrMode(); 
-  
-  char buffer_tanmay[20] = "Tanmay Kothale";
-  char buffer_varun[20] = "Varun Mehta";
-  char buffer_amey[20] = "Amey Dashaputre";
-  
-  //for testing purposes, print a hard coded
-  //string, clear it, print another, and repeat it
-  //forever
-  while (1)
-  {
-     lcd_clear();
-     delay(1000);
-     lcd_print(buffer_tanmay);
-     delay(5000);
-     	
-     lcd_clear();
-     delay(1000);
-     lcd_print(buffer_varun);
-     delay(5000);
-     
-     lcd_clear();
-     delay(1000);
-     lcd_print(buffer_amey);
-     delay(5000);
-  }
-  
-  return 0 ;
-}
-*/
