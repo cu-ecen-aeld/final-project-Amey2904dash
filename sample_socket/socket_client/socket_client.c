@@ -90,8 +90,14 @@ void func(int sockfd)
 * Parameters    : N/A
 * RETURN        : N/A
 ***********************************************************************************************/   
-int main()
+int main(int argc, char** argv[])
 {
+    
+    if (argc < 2)
+    {
+    	printf("Please provide ip address\n");
+    	exit(EXIT_FAILURE);
+    }
     
     lcd_init(); //initialize LCD display
     SetChrMode(); 
@@ -112,7 +118,7 @@ int main()
    
     // assign IP, PORT
     servaddr.sin_family = AF_INET;
-    servaddr.sin_addr.s_addr = inet_addr("10.0.0.85");
+    servaddr.sin_addr.s_addr = inet_addr(argv[1]);
     servaddr.sin_port = htons(PORT);
    
     if (connect(sockfd, (SA*)&servaddr, sizeof(servaddr)) != 0)      // connect the client socket to server socket
