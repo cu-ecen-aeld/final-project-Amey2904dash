@@ -12,7 +12,7 @@ Click [here](https://github.com/cu-ecen-aeld/final-project-Amey2904dash/wiki/Fin
 
 # Student Video Demos
 
-Click [here](https://github.com/cu-ecen-aeld/final-project-Amey2904dash/wiki/Final-Project-Schedule-Page) for Tanmay's Final Project Video.
+Click [here](https://github.com/cu-ecen-aeld/final-project-Amey2904dash/wiki/Tanmay's-Final-Project-Video) for Tanmay's Final Project Video.
 
 Click [here](https://github.com/cu-ecen-aeld/final-project-Amey2904dash/wiki/Final-Project-Schedule-Page) for Varun's Final Project Video.
 
